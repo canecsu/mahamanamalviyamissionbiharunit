@@ -11,7 +11,8 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('access_token') || null);
   const [loading, setLoading] = useState(true);
 
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+  // FIXED: Hardcoded live Render URL so it never tries to use localhost on Vercel
+  const API_BASE_URL = 'https://mahamanamalviyamissionbiharunit.onrender.com';
 
   // Check token validity on app load
   useEffect(() => {
@@ -44,7 +45,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     fetchUser();
-  }, [token, API_BASE_URL]);
+  }, [token]); // removed API_BASE_URL from dependencies since it's now a constant
 
   const login = async (email, password) => {
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
