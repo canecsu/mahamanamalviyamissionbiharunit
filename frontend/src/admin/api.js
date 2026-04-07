@@ -1,4 +1,4 @@
-const API_BASE = process.env.REACT_APP_ADMIN_API_URL || "http://localhost:8001";
+const API_BASE = process.env.REACT_APP_ADMIN_API_URL || "https://mahamanamalviyamissionbiharunit.onrender.com";
 
 export const CONTENT_TYPES = [
   "pages",
