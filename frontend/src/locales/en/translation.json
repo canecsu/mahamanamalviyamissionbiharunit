@@ -1,0 +1,239 @@
+{
+  "nav": {
+    "home": "",
+    "about": "About Us",
+    "mahamana": "Mahamana Ji",
+    "objectives": "Members",
+    "activities": "Activities",
+    "gallery": "Gallery",
+    "donation": "Donate Now",
+    "contact": "Contact Us"
+  },
+  "header": {
+    "title": "Mahamana Malaviya Mission",
+    "tagline": "Empowering Bihar through Education, Values, and Service"
+  },
+  "hero": {
+    "welcome": "Mahamana Malaviya Mission (Bihar Unit)",
+    "ready":"Welcomes You All",
+    "mission": "",
+    "joinBtn": "Become a member",
+    "learnMoreBtn": "Learn More",
+    "newsLabel": "Latest news",
+    "newsText": "Recently, the 15th National Convention was successfully organized at IIT Patna, bringing together scholars, leaders, and youth."
+  },
+  "homeAbout": {
+    "title": "Our Vision & Legacy",
+    "description": "Inspired by the life and teachings of Mahamana, the Bihar Chapter works tirelessly at the grassroots level. We believe that true development begins with moral values and accessible education for all. Join us in shaping the leaders of tomorrow."
+  },
+  "initiatives": {
+    "title": "Our Core Initiatives",
+    "cards": [
+      {
+        "heading": "Educational Excellence",
+        "text": "Organizing seminars, workshops, and providing guidance to meritorious students across Bihar."
+      },
+      {
+        "heading": "Value-Based Leadership",
+        "text": "Instilling the principles of ethics, nationalism, and social responsibility in the youth."
+      },
+      {
+        "heading": "Community Welfare",
+        "text": "Conducting health camps, awareness drives, and social service initiatives for the underprivileged."
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Be a Part of the Change",
+    "subtext": "Your time, skills, and support can help us reach more communities across Bihar.",
+    "volunteerBtn": "Become a Volunteer",
+    "contactBtn": "Contact Us"
+  },
+  "about": {
+    "heading": "Introduction of the Organization",
+    "content1": "Mahamana Malaviya Mission is a national-level organization dedicated to spreading the ideals and thoughts of Bharat Ratna Pandit Madan Mohan Malaviya Ji among society.",
+    "content2": "The Bihar Unit was formed to fulfill Malaviya Ji's vision on the sacred land of Bihar, a region known for its ancient heritage of knowledge and culture. It comprises a dedicated group of alumni from Bihar associated with Banaras Hindu University, along with individuals committed to social service.",
+    "content3": "This unit functions in alignment with the principles and guidance of the Mahamana Malaviya Mission at the national level.",
+    "missionTitle": "Mission Statement",
+    "missionText": "To build a society where education is combined with strong moral values and patriotism, propagating the ideals, vision, and nation-building philosophy of Mahamana Pandit Madan Mohan Malaviya Ji in every sphere of society."
+  },
+  "objectives": {
+    "heading": "Objectives & Areas of Work",
+    "categories": [
+      {
+        "title": "Contribution in the Field of Education",
+        "points": [
+          "Providing free educational materials to underprivileged and needy children",
+          "Organizing educational camps and training programs from time to time",
+          "Conducting motivational and knowledge-based lecture series on various subjects",
+          "Offering guidance and encouragement to talented students"
+        ]
+      },
+      {
+        "title": "Sports & Personality Development",
+        "points": [
+          "Encouraging children and youth to actively participate in sports",
+          "Promoting sports culture through large-scale tournaments and events",
+          "Developing discipline, leadership qualities, and team spirit among youth"
+        ]
+      }
+    ]
+  },
+  "areasOfWork": {
+    "heading": "Our Areas of Work",
+    "character": "Character Building",
+    "characterDesc": "Promoting discipline and moral values among youth.",
+    "culture": "Indian Culture Promotion",
+    "cultureDesc": "Preservation of Hindi language and Indian traditions.",
+    "ganga": "Ganga Cleanliness",
+    "gangaDesc": "Spreading awareness for clean and pure Ganga in Bihar.",
+    "social": "Social Service",
+    "socialDesc": "Raising voice against dowry, untouchability, and social evils.",
+    "cow": "Cow Protection",
+    "cowDesc": "Programs for protection and welfare of cows."
+  },
+  "corePhilosophy": {
+    "heading": "Our Core Philosophy",
+    "description": "Mahamana Malaviya Ji believed that education is not merely a means of acquiring knowledge but the foundation of character building and nation building. The Bihar Unit embraces this philosophy and works continuously to bring positive and meaningful change in society."
+  },
+  "futureInitiative": {
+    "heading": "Major Future Initiative",
+    "subHeading": "Establishment of a School in the Name of Mahamana Malaviya Ji",
+    "description": "One of the most significant resolutions of the Mahamana Malaviya Mission Bihar Unit is the establishment of this school.",
+    "features": [
+      "Serve as a center for holistic education",
+      "Integrate modern academic excellence with Indian cultural values",
+      "Give equal importance to moral education, patriotism, and personality development",
+      "Follow a value-based education system inspired by the ideals of Malaviya Ji"
+    ]
+  },
+  "commitment": {
+    "heading": "Our Commitment",
+    "description": "Our aim is not limited to organizing programs; we are committed to creating lasting and meaningful social impact. By spreading the ideals of Mahamana, we strive to contribute toward building an educated, cultured, and empowered Bihar."
+  },
+  "leadership": {
+    "heading": "Visionary Leadership & Organizational Strength",
+    "leaderName": "Shri Bipin Kumar Singh",
+    "post":"President,Mahamana Malaviya Mission (Bihar Unit)",
+    "philosophy": "His leadership style is rooted in coordination, communication, and positive engagement. He envisions the mission not merely as an organization that conducts programs, but as a powerful ideological movement dedicated to nation-building.",
+    "achievements": [
+      "The organizational structure has been strengthened",
+      "Youth participation has significantly increased",
+      "District-level units have been expanded and made more active"
+    ],
+    "idealsPromotion": "He firmly believes that education, values, and service to the nation form the foundation of a strong India. He presents Malaviya Ji’s principles in a modern context, inspiring the younger generation."
+  },
+  "team": {
+    "heading": "Our Team – Bihar Unit",
+    "patron": "Patron (Sanrakshak)",
+    "president": "President (Adhyaksh)",
+    "secretary": "General Secretary (Mahamantri)",
+    "treasurer": "Treasurer (Koshadhyaksh)",
+    "nationalPresident": "National President: Er. Harishankar Singh Ji"
+  },
+  "keyEvents": {
+    "heading": "Key Events & Programs",
+    "events": [
+      {
+        "title": "National Meeting 2024 – Patna",
+        "description": "A prestigious national-level meeting of the mission was successfully organized in Patna. This event marked a historic milestone for the Bihar Unit, showcasing its capability to host and manage national-level programs efficiently. Delegates and dignitaries discussed strategic plans and future directions."
+      },
+      {
+        "title": "Mahamana Hockey Gold Cup 2026 – Rajgir",
+        "description": "An upcoming highly commendable initiative. This is not merely a sports tournament, but a platform to promote discipline, leadership, and patriotism among youth. Through sports, Shri Singh aims to foster unity and positive energy in society."
+      }
+    ],
+    "annualPrograms": {
+      "title": "Annual Lectures & Ideological Programs",
+      "description": "Under his leadership, annual lectures, seminars, and cultural programs are organized regularly to spread the ideals of Madan Mohan Malaviya.",
+      "focusAreas": [
+        "Nationalism and value-based education",
+        "Youth empowerment and leadership development",
+        "Social harmony and cultural awakening"
+      ]
+    }
+  },
+  "mahamana": {
+    "heading": "Bharat Ratna Pandit Madan Mohan Malaviya",
+    "intro": "Pandit Madan Mohan Malaviya was a towering figure in the history of modern India. A multifaceted personality, he was a great educationist, an eloquent orator, a dedicated freedom fighter, a pioneering journalist, and a social reformer. He is revered as a 'Karmayogi'. The title Mahamana (a magnanimous or great soul), by which he is most commonly known, reflects the immense respect he commanded across the political and social spectrum of India. He was a bridge between the moderates and extremists in the freedom struggle and a synthesizer of ancient Indian traditions with modern scientific outlooks.",
+    "quote": "",
+    "sections": {
+      "life": {
+        "title": "1. Life Sketch (Jeevan Vritt)",
+        "early": "Early Life and Education: Madan Mohan Malaviya was born on December 25, 1861, in Prayagraj (then Allahabad), Uttar Pradesh, into a Brahmin family known for their Sanskrit scholarship. His grandfather was a renowned Sanskrit scholar, and his father, Pandit Brijnath, was also learned in the scriptures and an accomplished Kathavyachak (storyteller of religious texts). Malaviya received his early education in Sanskrit pathshalas before joining an English school. He completed his matriculation from Allahabad Zila School and eventually earned a B.A. from the University of Calcutta in 1884.",
+        "career": "Began as a teacher (Rs. 40/month), became editor of 'Hindustan' (1887), and a highly successful lawyer. At age 50, he gave up law to serve the nation.",
+        "politics": "Political Leadership: He joined the Indian National Congress (INC) early in its history (1886) and quickly rose through the ranks due to his powerful oratory and dedication. He had the unique distinction of serving as the President of the Indian National Congress four times (1909, 1918, 1932, and 1933). Later Years and Recognition: He continued to serve the nation until his death on November 12, 1946, just a year before India gained independence. In 2014, the Government of India posthumously awarded him the Bharat Ratna, the country’s highest civilian honour."
+      },
+      "vision": {
+        "title": "2. Vision and Philosophy",
+        "synthesis": "Synthesis of Tradition and Modernity: He believed that for India to progress, it needed a blend of the best of Western scientific advancement and the spiritual and ethical foundations of Eastern wisdom. He did not want Indians to be mere copycats of the West but to become self-confident citizens grounded in their own culture.",
+        "education": "Holistic Education: For Malaviya, education was not just about earning a degree; it was about character building. He emphasized patriotism with piety. He envisaged an education system that produced disciplined, trustworthy, and ethically sound individuals who were also intellectually sharp.",
+        "harmony": "Social Reform and Harmony: Though an orthodox Hindu himself, his vision was inclusive. He worked actively to eradicate untouchability and strongly advocated for the entry of Dalits into temples. He believed deeply in Hindu-Muslim unity, famously stating, 'India is not a country of the Hindus only. It is a country of the Muslims, the Christians, and the Parsis too.'"
+      },
+      "bhu": {
+        "title": "3. Founding of BHU (The Magnum Opus)",
+        "dream": "The Dream: Around the turn of the century, Malaviya envisioned a national university that would be completely Indian in spirit, funded by Indians, and dedicated to producing young men and women of character who would serve the motherland. He wanted an institution that rivaled the best universities in the world right here in India.",
+        "beggar": "The Great Beggar: To realize this massive dream, huge funds were required. Malaviya undertook the herculean task of fundraising. He traveled across the length and breadth of India, appealing to kings, commoners, princes, and peasants alike. He became known as the Prince of Beggars for his tireless efforts in collecting donations for BHU. It is said that his appeal was so magnetic that people famously donated generously to his cause.",
+        "realization": "Realization: With the support of Annie Besant and the Maharaja of Darbhanga, BHU was established on Vasant Panchami in 1916. It became the first residential university in modern India. Malaviya served as its Vice-Chancellor from 1919 to 1938, nurturing the institution with paternal care. Today, it stands as one of Asia's largest residential universities."
+      },
+      "nation": {
+        "title": "4. Contribution to Nation Building",
+        "freedom": "Freedom Struggle: He was a prominent leader in the freedom movement. He participated actively in movements against the British, including the Salt Satyagraha and the Civil Disobedience Movement, courting arrest several times. He was part of the Indian delegation to the Second Round Table Conference in London in 1931 alongside Mahatma Gandhi.",
+        "journalism": "Journalism and Public Opinion: He recognized the power of the press in awakening national consciousness. He was the editor of Hindustan and Indian Union. He started the Hindi weekly Abhyudaya in 1907. He founded the English daily The Leader of Allahabad in 1909 to voice nationalist opinions. Later, he also served as the Chairman of the Board of Directors of the Hindustan Times.",
+        "hindi": "Champion of Hindi: He was a staunch supporter of the Hindi language and played a pivotal role in getting Hindi recognized in the courts and administration of the United Provinces. He was closely associated with the Hindi Sahitya Sammelan.",
+        "motto": "Popularizing the National Motto: He is credited with popularizing the phrase Satyameva Jayate (Truth Alone Triumphs) from the Mundaka Upanishad, making it a national rallying cry. It was later adopted as the National Motto of India."
+      }
+    }
+  },
+  "activities": {
+    "heading": "Activities by Bihar Unit",
+    "jayanti": "Malaviya Jayanti",
+    "jayantiDesc": "Annual celebration on 25 December with seminars and discussions.",
+    "seminars": "Seminars & Workshops",
+    "seminarsDesc": "Programs for students and teachers on nation building.",
+    "education": "Education Support",
+    "educationDesc": "Helping poor and meritorious students.",
+    "convention": "National Convention",
+    "conventionDesc": "Recently, the 15th National Convention was organized at IIT Patna."
+  },
+  "gallery": {
+    "heading": "Photo Gallery",
+    "subheading": "Glimpses of Our Activities"
+  },
+  "donation": {
+    "description": "Support the Vision of Service and Education",
+    "upiLabel": "7209329329m.pnb",
+    "scanToDonate": "Scan to Donate"
+  },
+  "join": {
+    "heading": "Join this Noble Mission",
+    "content": "If you are inspired by Malaviya Ji's vision and want to serve society, become a member today.",
+    "name": "Name",
+    "fatherName": "Father's Name",
+    "address": "Address (District, Bihar)",
+    "phone": "Phone Number",
+    "email": "Email",
+    "occupation": "Occupation",
+    "submitBtn": "Submit",
+    "donationTitle": "Donation Details",
+    "accountName": "Account Name",
+    "accountNo": "Account Number",
+    "ifsc": "IFSC Code",
+    "bank": "Bank Name",
+    "successMsg": "Thank you for joining! We will contact you soon.",
+    "errorMsg": "Please fill all required fields."
+  },
+  "contact": {
+    "heading": "Contact Us",
+    "office": "Office Address",
+    "officeAddress": "Ground floor, Ambika Block, Hari Nagar at NH-139, Phulwari sharif, Patna-801505",
+    "phone": "+91 79923 62557, +91 72093 29329",
+    "email": "mmmbiharunit@gmail.com",
+    "hours": "Office Hours",
+    "hoursText": "Monday - Saturday: 10:00 AM - 6:00 PM"
+  },
+  "footer": {
+    "copyright": "© 2026 Mahamana Malaviya Mission – Designed by Sumirayan Design.",
+    "tagline": "Education, Values, Nation Building"
+  }
+}

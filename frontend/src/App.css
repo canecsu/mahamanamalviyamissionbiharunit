@@ -1,0 +1,133 @@
+/* =========================================
+   Base Resets (Master Overflow Fix)
+   ========================================= */
+html, body {
+    overflow-x: hidden; /* Ye line horizontal scroll ko rokti hai */
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* =========================================
+   Custom Animations
+   ========================================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-scroll {
+    animation: scroll 20s linear infinite;
+}
+
+/* =========================================
+   Custom Scrollbar
+   ========================================= */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #F4C430;
+    border-radius: 6px;
+    border: 2px solid #111111; /* Adds a nice gap between thumb and track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FFD700;
+}
+
+/* =========================================
+   Interactive States & Utilities
+   ========================================= */
+/* Focus States for Accessibility */
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid #F4C430;
+    outline-offset: 2px;
+}
+
+/* Selection Color (When user highlights text) */
+::selection {
+    background-color: #F4C430;
+    color: #111111;
+}
+
+/* Smooth Transitions */
+a, button {
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img {
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #F4C430;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FFD700;
+}
+
+/* Focus States */
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid #F4C430;
+    outline-offset: 2px;
+}
+
+/* Selection Color */
+::selection {
+    background-color: #F4C430;
+    color: #111111;
+}
+
+/* Transitions */
+a, button {
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+img {
+    transition: transform 0.3s ease;
+}
