@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, X, ChevronRight, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronRight, ChevronDown, User, LogOut, ShieldAlert } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext'; // Import the Auth Context
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const location = useLocation();
+  
+  // Extract user state and logout function from Context
+  const { user, logout } = useAuth(); 
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeMobileDropdown, setActiveMobileDropdown] = useState(null); // Tracks open mobile dropdown
+  const [activeMobileDropdown, setActiveMobileDropdown] = useState(null);
 
-  // Increased scroll threshold to 50 to prevent micro-jitters
+  // Scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -26,7 +31,6 @@ const Header = () => {
     } else {
       document.body.style.overflow = ''; 
     }
-    
     return () => {
       document.body.style.overflow = '';
     };
@@ -47,10 +51,9 @@ const Header = () => {
     setActiveMobileDropdown(activeMobileDropdown === label ? null : label);
   };
 
-  // Restructured navLinks to include dropdown menus
   const navLinks = [
     {
-      label: currentLanguage === 'hi' ? 'हमारे बारे में' : 'About Us', // Fallback or use t('nav.about_us')
+      label: currentLanguage === 'hi' ? 'हमारे बारे में' : 'About Us',
       dropdown: true,
       items: [
         { path: '/about', label: t('nav.about') },
@@ -91,7 +94,6 @@ const Header = () => {
               <div className={`shrink-0 bg-gradient-to-br from-[#F4C430] to-[#ffd700] rounded-full flex items-center justify-center overflow-hidden shadow-lg border-2 border-[#111111] group-hover:scale-105 transition-transform duration-300 ${scrolled ? 'w-9 h-9 md:w-11 md:h-11' : 'w-11 h-11 md:w-14 md:h-14'}`}>
                 <img src="malviyamissionbiharlogo.png" alt="Logo" className="w-[85%] h-[85%] object-contain" />
               </div>
-              
               <div className="hidden sm:block min-w-max">
                 <h1 
                   className={`text-white font-extrabold tracking-tight transition-all duration-300 group-hover:text-[#F4C430] leading-none whitespace-nowrap ${scrolled ? 'text-sm md:text-lg' : 'text-base md:text-xl'}`} 
@@ -105,27 +107,19 @@ const Header = () => {
             {/* --- CENTER: Desktop Navigation --- */}
             <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
               {navLinks.map((link) => {
-                
-                // If it's a Dropdown Menu
                 if (link.dropdown) {
-                  // Check if any sub-item is active
                   const isAnyChildActive = link.items.some(item => location.pathname === item.path);
-                  
                   return (
                     <div className="relative group" key={link.label}>
                       <button 
                         className={`flex items-center gap-1 relative whitespace-nowrap px-2.5 xl:px-3.5 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 ${
-                          isAnyChildActive 
-                            ? 'text-[#F4C430]' 
-                            : 'text-gray-300 hover:text-white hover:bg-white/10'
+                          isAnyChildActive ? 'text-[#F4C430]' : 'text-gray-300 hover:text-white hover:bg-white/10'
                         }`}
                         style={getFont()}
                       >
                         {link.label}
                         <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:-rotate-180" />
                       </button>
-
-                      {/* Dropdown Container */}
                       <div className="absolute top-full left-0 mt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 transition-all duration-300 ease-out z-50">
                         <div className="bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl p-2 overflow-hidden backdrop-blur-xl">
                           {link.items.map(subItem => {
@@ -135,9 +129,7 @@ const Header = () => {
                                 key={subItem.path} 
                                 to={subItem.path} 
                                 className={`block px-4 py-2.5 mb-1 last:mb-0 rounded-lg text-sm font-semibold transition-all ${
-                                  isSubActive 
-                                    ? 'bg-[#F4C430] text-[#111111]' 
-                                    : 'text-gray-300 hover:bg-white/10 hover:text-white hover:translate-x-1'
+                                  isSubActive ? 'bg-[#F4C430] text-[#111111]' : 'text-gray-300 hover:bg-white/10 hover:text-white hover:translate-x-1'
                                 }`}
                               >
                                 {subItem.label}
@@ -150,16 +142,13 @@ const Header = () => {
                   );
                 }
 
-                // Normal Link Render
                 const isActive = location.pathname === link.path;
                 return (
                   <Link
                     key={link.path}
                     to={link.path}
                     className={`relative whitespace-nowrap px-2.5 xl:px-3.5 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 ${
-                      isActive
-                        ? 'text-[#111111] bg-[#F4C430] shadow-[0_0_15px_rgba(244,196,48,0.3)]'
-                        : 'text-gray-300 hover:text-white hover:bg-white/10'
+                      isActive ? 'text-[#111111] bg-[#F4C430] shadow-[0_0_15px_rgba(244,196,48,0.3)]' : 'text-gray-300 hover:text-white hover:bg-white/10'
                     }`}
                     style={getFont()}
                   >
@@ -169,7 +158,7 @@ const Header = () => {
               })}
             </nav>
 
-            {/* --- RIGHT: Actions (Language, Join CTA, Mobile Toggle) --- */}
+            {/* --- RIGHT: Actions --- */}
             <div className="flex items-center gap-1.5 md:gap-2 z-50 shrink-0">
               
               {/* Language Switcher */}
@@ -194,10 +183,42 @@ const Header = () => {
                 </button>
               </div>
 
+              {/* Authentication Section (Desktop Only) */}
+              <div className="hidden lg:flex items-center ml-2 border-l border-white/10 pl-2">
+                {user ? (
+                  <div className="flex items-center gap-3 bg-white/5 border border-white/10 pl-4 pr-1.5 py-1.5 rounded-full">
+                    <span className="text-gray-300 text-sm font-medium">Hi, {user.name.split(' ')[0]}</span>
+                    
+                    {/* Admin Dashboard Link */}
+                    {user.role === 'admin' && (
+                      <Link to="/admin" className="flex items-center gap-1 text-[#F4C430] hover:text-white text-xs font-bold transition-colors uppercase tracking-wider bg-[#F4C430]/10 px-2 py-1 rounded-md">
+                        <ShieldAlert className="w-3 h-3" /> Admin
+                      </Link>
+                    )}
+                    
+                    <button 
+                      onClick={logout} 
+                      className="bg-red-500/10 hover:bg-red-500 hover:text-white text-red-400 p-1.5 rounded-full transition-colors" 
+                      title="Logout"
+                    >
+                      <LogOut className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    to="/auth"
+                    className="flex items-center gap-1.5 text-gray-300 hover:text-[#F4C430] px-3 py-2 text-sm font-bold transition-all"
+                  >
+                    <User className="w-4 h-4" />
+                    Login
+                  </Link>
+                )}
+              </div>
+
               {/* Prominent "Join Us" Button (Desktop Only) */}
               <Link
                 to="/donation"
-                className="hidden lg:flex items-center gap-1.5 bg-gradient-to-r from-[#F4C430] to-[#ffd700] text-[#111111] px-4 xl:px-5 py-2 rounded-full font-extrabold text-sm hover:shadow-[0_0_20px_rgba(244,196,48,0.4)] transform hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap"
+                className="hidden lg:flex items-center gap-1.5 bg-gradient-to-r from-[#F4C430] to-[#ffd700] text-[#111111] px-4 xl:px-5 py-2 rounded-full font-extrabold text-sm hover:shadow-[0_0_20px_rgba(244,196,48,0.4)] transform hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap ml-1"
                 style={getFont()}
               >
                 {t('nav.donation')}
@@ -270,9 +291,7 @@ const Header = () => {
                     key={link.path}
                     to={link.path}
                     className={`flex items-center justify-between p-4 rounded-xl font-bold text-lg transition-all ${
-                      isActive
-                        ? 'bg-[#F4C430] text-[#111111]'
-                        : 'text-white border border-white/5 hover:bg-white/10'
+                      isActive ? 'bg-[#F4C430] text-[#111111]' : 'text-white border border-white/5 hover:bg-white/10'
                     }`}
                     style={getFont()}
                     onClick={() => setMobileMenuOpen(false)}
@@ -284,8 +303,45 @@ const Header = () => {
               })}
             </nav>
             
-            {/* Mobile "Join Us" CTA */}
-            <div className="mt-8 pt-8 border-t border-white/10">
+            {/* Mobile Auth & CTA Section */}
+            <div className="mt-8 pt-8 border-t border-white/10 space-y-4">
+              
+              {/* Mobile Auth Profile */}
+              {user ? (
+                <div className="bg-white/5 p-4 rounded-xl border border-white/10">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <div className="w-10 h-10 bg-[#F4C430] rounded-full flex items-center justify-center text-[#111111] font-bold">
+                        {user.name.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="text-white font-bold leading-tight">{user.name}</p>
+                        <p className="text-gray-400 text-xs">{user.email}</p>
+                      </div>
+                    </div>
+                    {user.role === 'admin' && (
+                      <Link to="/admin" onClick={() => setMobileMenuOpen(false)} className="text-[#F4C430] text-xs font-bold uppercase tracking-wide bg-[#F4C430]/10 px-2 py-1 rounded">
+                        Admin
+                      </Link>
+                    )}
+                  </div>
+                  <button
+                    onClick={() => { logout(); setMobileMenuOpen(false); }}
+                    className="flex items-center justify-center gap-2 w-full bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white border border-red-500/30 p-3 rounded-lg font-bold transition-colors"
+                  >
+                    <LogOut className="w-5 h-5" /> Logout
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  to="/auth"
+                  className="flex items-center justify-center gap-2 w-full bg-white/10 text-white border border-white/20 p-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <User className="w-5 h-5" /> Login / Register
+                </Link>
+              )}
+
               <Link
                 to="/donation"
                 className="flex items-center justify-center gap-2 w-full bg-[#F4C430] text-[#111111] p-4 rounded-xl font-extrabold text-lg"
