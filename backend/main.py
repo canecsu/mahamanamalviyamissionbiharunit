@@ -18,7 +18,6 @@ load_dotenv(ROOT_DIR / ".env")
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "your-supabase-url")
 # CRITICAL: Use the SERVICE_ROLE key here, not the ANON key!
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "your-supabase-service-role-key")
-CORS_ORIGINS = [o.strip() for o in os.environ.get("CORS_ORIGINS", "*").split(",") if o.strip()]
 
 # --- AUTH CONFIGURATION ---
 SECRET_KEY = os.environ.get("SECRET_KEY", "your-super-secret-jwt-key-change-in-production")
@@ -29,9 +28,20 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer()
 
 app = FastAPI(title="Mahamana Admin API")
+
+# ==========================================
+# CRITICAL CORS FIX FOR VERCEL
+# ==========================================
+# You must list the exact frontend URLs here. No trailing slashes.
+ORIGINS = [
+    "http://localhost:5173",  # Vite local development
+    "http://localhost:3000",  # CRA local development
+    "https://mahamanamalviyamissionbiharunit-two.vercel.app"  # Your deployed frontend
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=CORS_ORIGINS or ["*"],
+    allow_origins=ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -47,7 +57,7 @@ class UserCreate(BaseModel):
     email: EmailStr
     password: str = Field(min_length=6)
     name: str = Field(min_length=2)
-    role: str = "client" # Can be 'client' or 'admin'
+    # Role is removed from here for security. It will be hardcoded in the route.
 
 class UserLogin(BaseModel):
     email: EmailStr
@@ -143,7 +153,6 @@ class DonationModel(BaseModel):
     message: str = ""
     status: str = "submitted"
 
-
 # ==========================================
 # AUTHENTICATION & SECURITY UTILS
 # ==========================================
@@ -214,7 +223,7 @@ def register_user(payload: UserCreate):
         "email": payload.email,
         "password_hash": hashed_pw,
         "name": payload.name,
-        "role": payload.role if payload.role in ["client", "admin"] else "client"
+        "role": "client" # HARDCODED FOR SECURITY
     }
     user_doc = with_timestamps(user_doc)
     
