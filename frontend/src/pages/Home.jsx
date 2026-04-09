@@ -298,8 +298,11 @@ const Home = () => {
                 <h3 className="text-4xl md:text-5xl font-extrabold text-[#111111] mb-8" style={getFontStyle()}>
                   {t('leadership.leaderName')}
                 </h3>
-                <p className="text-4xl md:text-xl font-extrabold text-[#111111] mb-8" style={getFontStyle()}>
+                <p className="text-2xl md:text-xl font-bold text-[#111111] mb-8" style={getFontStyle()}>
                   {t('leadership.post')}
+                </p>
+                <p className="text-gray-600 leading-relaxed" style={getFontStyle()}>
+                  {leadership.subpost}
                 </p>
                 <blockquote className="text-xl md:text-2xl text-gray-700 italic mb-10 leading-relaxed border-l-4 border-[#F4C430] pl-6 md:pl-8 py-2 relative" style={getFontStyle()}>
                   <span className="absolute -top-4 -left-2 text-6xl text-[#F4C430]/20 font-serif">"</span>
