@@ -288,7 +288,9 @@ const Home = () => {
                   className="relative w-full aspect-[4/5] object-cover rounded-[2rem] shadow-xl z-10 grayscale-[10%] group-hover:grayscale-0 transition-all duration-500"
                 />
               </div>
-              <div className="w-full lg:w-3/5 p-4 lg:p-8">
+              
+              {/* Added "text-left" here to ensure proper text orientation */}
+              <div className="w-full lg:w-3/5 p-4 lg:p-8 text-left">
                 <div className="flex items-center gap-3 mb-6">
                   <UserCircle2 className="w-6 h-6 text-[#F4C430]" />
                   <span className="text-[#F4C430] font-bold text-sm uppercase tracking-widest" style={{ fontFamily: 'Poppins, sans-serif' }}>
@@ -301,9 +303,12 @@ const Home = () => {
                 <p className="text-2xl md:text-xl font-bold text-[#111111] mb-8" style={getFontStyle()}>
                   {t('leadership.post')}
                 </p>
+                
+                {/* Changed leadership.subpost to t('leadership.subpost') */}
                 <p className="text-gray-600 leading-relaxed" style={getFontStyle()}>
-                  {leadership.subpost}
+                  {t('leadership.subpost')}
                 </p>
+                
                 <blockquote className="text-xl md:text-2xl text-gray-700 italic mb-10 leading-relaxed border-l-4 border-[#F4C430] pl-6 md:pl-8 py-2 relative" style={getFontStyle()}>
                   <span className="absolute -top-4 -left-2 text-6xl text-[#F4C430]/20 font-serif">"</span>
                   {t('leadership.philosophy')}
@@ -330,7 +335,7 @@ const Home = () => {
             <div className="absolute top-0 right-0 w-full h-full opacity-30" style={{ background: 'radial-gradient(circle at 100% 0%, #F4C430 0%, transparent 50%)' }}></div>
             
             <div className="flex flex-col md:flex-row items-center p-8 md:p-16 gap-12 relative z-10">
-              <div className="w-full md:w-3/5">
+              <div className="w-full md:w-3/5 text-left">
                 <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight" style={getFontStyle()}>
                   Support <span className="text-[#F4C430]">Mahamana Malviya Mission</span> Bihar
                 </h2>
