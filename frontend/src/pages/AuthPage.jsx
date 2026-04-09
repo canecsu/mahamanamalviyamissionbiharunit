@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-// FIXED IMPORT PATH HERE:
 import { useAuth } from '../contexts/AuthContext'; 
 import { Mail, Lock, User, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 
@@ -10,7 +9,6 @@ const AuthPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Where to redirect after login (defaults to dashboard or home)
   const from = location.state?.from?.pathname || '/';
 
   const [formData, setFormData] = useState({
@@ -33,16 +31,18 @@ const AuthPage = () => {
     setStatus({ loading: true, error: null });
 
     try {
+      let user;
       if (isLogin) {
-        const user = await login(formData.email, formData.password);
-        // Route admins to a special dashboard if needed
-        if (user.role === 'admin') {
-          navigate('/admin'); 
-        } else {
-          navigate(from, { replace: true });
-        }
+        user = await login(formData.email, formData.password);
       } else {
-        await register(formData.name, formData.email, formData.password);
+        // Capture the auto-logged-in user after registration
+        user = await register(formData.name, formData.email, formData.password);
+      }
+
+      // Route admins to a special dashboard if needed
+      if (user && user.role === 'admin') {
+        navigate('/admin', { replace: true }); 
+      } else {
         navigate(from, { replace: true });
       }
     } catch (error) {
@@ -91,7 +91,6 @@ const AuthPage = () => {
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             
-            {/* Name Field - Only for Registration */}
             {!isLogin && (
               <div className="animate-fadeIn">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
@@ -112,7 +111,6 @@ const AuthPage = () => {
               </div>
             )}
 
-            {/* Email Field */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Email address</label>
               <div className="relative">
@@ -131,7 +129,6 @@ const AuthPage = () => {
               </div>
             </div>
 
-            {/* Password Field */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
               <div className="relative">
@@ -151,7 +148,6 @@ const AuthPage = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
             <div>
               <button
                 type="submit"
