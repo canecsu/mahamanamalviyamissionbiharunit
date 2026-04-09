@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     fetchUser();
-  }, [token]); // removed API_BASE_URL from dependencies since it's now a constant
+  }, [token]); 
 
   const login = async (email, password) => {
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
@@ -70,12 +70,17 @@ export const AuthProvider = ({ children }) => {
     const response = await fetch(`${API_BASE_URL}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, password, role: 'client' }) // Default to client
+      // The backend forces the "client" role automatically for security
+      body: JSON.stringify({ name, email, password }) 
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      throw new Error(errorData.detail || 'Registration failed');
+      // Handle FastAPI validation errors smoothly
+      const errorMessage = Array.isArray(errorData.detail) 
+        ? errorData.detail[0].msg 
+        : errorData.detail;
+      throw new Error(errorMessage || 'Registration failed');
     }
 
     // Auto-login after successful registration
