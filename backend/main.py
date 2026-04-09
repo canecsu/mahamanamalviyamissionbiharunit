@@ -30,19 +30,14 @@ security = HTTPBearer()
 app = FastAPI(title="Mahamana Admin API")
 
 # ==========================================
-# CRITICAL CORS FIX FOR VERCEL
+# THE SILVER BULLET CORS FIX
 # ==========================================
-# You must list the exact frontend URLs here. No trailing slashes.
-ORIGINS = [
-    "http://localhost:5173",  # Vite local development
-    "http://localhost:3000",  # CRA local development
-    "https://mahamanamalviyamissionbiharunit-two.vercel.app"  # Your deployed frontend
-]
-
+# Since we are using Bearer tokens in headers, we don't need credentials=True.
+# This allows us to use a wildcard "*" safely and stops Vercel CORS blocking.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ORIGINS,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
