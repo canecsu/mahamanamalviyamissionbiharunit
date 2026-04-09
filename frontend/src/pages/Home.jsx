@@ -276,57 +276,61 @@ const Home = () => {
       </section>
 
       {/* Leadership Section */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto bg-gray-50 rounded-[2.5rem] p-4 md:p-10 shadow-[inset_0_2px_20px_rgba(0,0,0,0.02)] border border-gray-100">
-            <div className="flex flex-col lg:flex-row items-center gap-12">
-              <div className="w-full lg:w-2/5 flex-shrink-0 relative group">
-                <div className="absolute inset-0 bg-[#F4C430] rounded-[2rem] transform translate-x-4 translate-y-4 group-hover:translate-x-6 group-hover:translate-y-6 transition-transform duration-500"></div>
-                <img
-                  src="bipin.jpeg"
-                  alt="Director"
-                  className="relative w-full aspect-[4/5] object-cover rounded-[2rem] shadow-xl z-10 grayscale-[10%] group-hover:grayscale-0 transition-all duration-500"
-                />
-              </div>
-              
-              {/* Added "text-left" here to ensure proper text orientation */}
-              <div className="w-full lg:w-3/5 p-4 lg:p-8 text-left">
-                <div className="flex items-center gap-3 mb-6">
-                  <UserCircle2 className="w-6 h-6 text-[#F4C430]" />
-                  <span className="text-[#F4C430] font-bold text-sm uppercase tracking-widest" style={{ fontFamily: 'Poppins, sans-serif' }}>
-                    {t('leadership.heading', 'Leadership')}
-                  </span>
-                </div>
-                <h3 className="text-4xl md:text-5xl font-extrabold text-[#111111] mb-8" style={getFontStyle()}>
-                  {t('leadership.leaderName')}
-                </h3>
-                <p className="text-2xl md:text-xl font-bold text-[#111111] mb-8" style={getFontStyle()}>
-                  {t('leadership.post')}
-                </p>
-                
-                {/* Changed leadership.subpost to t('leadership.subpost') */}
-                <p className="text-gray-600 leading-relaxed" style={getFontStyle()}>
-                  {t('leadership.subpost')}
-                </p>
-                
-                <blockquote className="text-xl md:text-2xl text-gray-700 italic mb-10 leading-relaxed border-l-4 border-[#F4C430] pl-6 md:pl-8 py-2 relative" style={getFontStyle()}>
-                  <span className="absolute -top-4 -left-2 text-6xl text-[#F4C430]/20 font-serif">"</span>
-                  {t('leadership.philosophy')}
-                </blockquote>
-                <Link
-                  to="/about"
-                  className="group inline-flex items-center gap-3 bg-[#111111] text-white px-8 py-4 rounded-full font-bold hover:bg-[#F4C430] hover:text-[#111111] transition-all duration-300 shadow-xl hover:shadow-2xl"
-                  style={getFontStyle()}
-                >
-                  {t('hero.learnMoreBtn')}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-          </div>
+     <section className="py-12 md:py-24 bg-white">
+  <div className="container mx-auto px-4">
+    <div className="max-w-6xl mx-auto bg-gray-50 rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-10 shadow-[inset_0_2px_20px_rgba(0,0,0,0.02)] border border-gray-100">
+      <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
+        
+        {/* Image Container - Adjusted offsets for mobile */}
+        <div className="w-full max-w-[320px] lg:max-w-none lg:w-2/5 flex-shrink-0 relative group">
+          <div className="absolute inset-0 bg-[#F4C430] rounded-[2rem] transform translate-x-2 translate-y-2 md:translate-x-4 md:translate-y-4 group-hover:translate-x-6 group-hover:translate-y-6 transition-transform duration-500"></div>
+          <img
+            src="bipin.jpeg"
+            alt="Director"
+            className="relative w-full aspect-[4/5] object-cover rounded-[2rem] shadow-xl z-10 grayscale-[10%] group-hover:grayscale-0 transition-all duration-500"
+          />
         </div>
-      </section>
 
+        {/* Text Content - Added mobile centering and responsive font sizes */}
+        <div className="w-full lg:w-3/5 text-center lg:text-left px-2 md:px-0">
+          <div className="flex items-center justify-center lg:justify-start gap-3 mb-4 md:mb-6">
+            <UserCircle2 className="w-5 h-5 text-[#F4C430]" />
+            <span className="text-[#F4C430] font-bold text-xs md:text-sm uppercase tracking-widest" style={{ fontFamily: 'Poppins, sans-serif' }}>
+              {t('leadership.heading', 'Leadership')}
+            </span>
+          </div>
+
+          <h3 className="text-3xl md:text-5xl font-extrabold text-[#111111] mb-4 md:mb-6 leading-tight" style={getFontStyle()}>
+            {t('leadership.leaderName')}
+          </h3>
+
+          <p className="text-lg md:text-xl font-bold text-[#111111] mb-4" style={getFontStyle()}>
+            {t('leadership.post')}
+          </p>
+
+          <p className="text-gray-600 leading-relaxed mb-6 text-sm md:text-base" style={getFontStyle()}>
+            {t('leadership.subpost')}
+          </p>
+
+          <blockquote className="text-lg md:text-2xl text-gray-700 italic mb-8 leading-relaxed border-l-4 border-[#F4C430] pl-5 md:pl-8 py-2 relative text-left" style={getFontStyle()}>
+            <span className="absolute -top-3 -left-2 text-5xl text-[#F4C430]/20 font-serif">"</span>
+            {t('leadership.philosophy')}
+          </blockquote>
+
+          <Link
+            to="/about"
+            className="group inline-flex items-center justify-center gap-3 bg-[#111111] text-white px-8 py-4 rounded-full font-bold hover:bg-[#F4C430] hover:text-[#111111] transition-all duration-300 shadow-lg w-full sm:w-auto"
+            style={getFontStyle()}
+          >
+            {t('hero.learnMoreBtn')}
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
       {/* Donation Section */}
       <section className="py-24 bg-gray-50">
         <div className="container mx-auto px-4">
