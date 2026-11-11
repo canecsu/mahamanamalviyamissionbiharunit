@@ -43,7 +43,7 @@ const Join = () => {
       `Email: ${formData.email}`,
       `Address: ${formData.address}`,
       `Occupation: ${formData.occupation}`
-    ].join("\\n");
+    ].join("\n");
     window.location.href = `mailto:mmmbiharunit@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
     toast.info(t('join.emailDraftNotice'));
   };

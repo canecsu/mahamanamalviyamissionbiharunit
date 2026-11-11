@@ -15,12 +15,19 @@ from supabase import Client, create_client
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / ".env")
 
-SUPABASE_URL = os.environ.get("SUPABASE_URL", "your-supabase-url")
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
 # CRITICAL: Use the SERVICE_ROLE key here, not the ANON key!
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY", "your-supabase-service-role-key")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 
 # --- AUTH CONFIGURATION ---
-SECRET_KEY = os.environ.get("SECRET_KEY", "your-super-secret-jwt-key-change-in-production")
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+# Missing or weak configuration must stop startup rather than silently use
+# placeholder credentials or a predictable JWT signing secret.
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise RuntimeError("Supabase credentials are missing: set SUPABASE_URL and SUPABASE_KEY in Render")
+if not SECRET_KEY or len(SECRET_KEY) < 32:
+    raise RuntimeError("SECRET_KEY must be configured as a strong 32+ character secret in Render")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 Days
 
@@ -261,7 +268,19 @@ def get_my_profile(current_user: dict = Depends(get_current_user)):
 
 @app.get("/healthz")
 def health():
-    return {"status": "ok", "database": "Supabase Connected"}
+    # Liveness only: does not make a claim about database connectivity.
+    return {"status": "ok", "database": "not_checked"}
+
+
+@app.get("/readyz")
+def readiness():
+    # Read-only and no user records are included in the response.
+    try:
+        supabase.table("users").select("id").limit(1).execute()
+    except Exception:
+        # Never expose connection strings, API keys or internal DB errors.
+        raise HTTPException(status_code=503, detail="Database is not ready")
+    return {"status": "ready", "database": "reachable"}
 
 # ==========================================
 # DYNAMIC CRUD ROUTES GENERATOR

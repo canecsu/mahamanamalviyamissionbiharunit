@@ -42,8 +42,10 @@ class FrontendIntegrityTests(unittest.TestCase):
 
     def test_api_url_and_build_system_match(self):
         content_api = (SRC / "lib" / "contentApi.js").read_text()
-        self.assertIn("REACT_APP_ADMIN_API_URL", content_api)
-        self.assertNotIn("onrender.com/docs", content_api)
+        api_config = (SRC / "lib" / "apiConfig.js").read_text()
+        self.assertIn("REACT_APP_ADMIN_API_URL", api_config)
+        self.assertIn("apiUrl", content_api)
+        self.assertNotIn("onrender.com/docs", api_config + content_api)
         for path in SRC.rglob("*.jsx"):
             self.assertNotIn("import.meta.env", path.read_text(), str(path))
 
