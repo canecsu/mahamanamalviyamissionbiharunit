@@ -16,7 +16,8 @@ import Home from "./pages/Home";
 import AdminApp from "./admin/AdminApp";
 import About from "./pages/About";
 import Mahamana from "./pages/Mahamana";
-import Objectives from "./pages/Objectives";
+import Members from "./pages/Objectives";
+import MissionObjectives from "./pages/MissionObjectives";
 import Activities from "./pages/Activities";
 import Gallery from "./pages/Gallery";
 import Join from "./pages/Join";
@@ -78,7 +79,8 @@ function Shell() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/mahamana" element={<Mahamana />} />
-          <Route path="/objectives" element={<Objectives />} />
+          <Route path="/objectives" element={<MissionObjectives />} />
+          <Route path="/members" element={<Members />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/events" element={<Events />} />
