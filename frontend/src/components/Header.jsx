@@ -349,7 +349,7 @@ const Header = () => {
                 style={getFont()}
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {t('nav.join')}
+                {t('nav.donation')}
                 <ChevronRight className="w-5 h-5" />
               </Link>
             </div>
