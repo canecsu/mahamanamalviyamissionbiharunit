@@ -1,13 +1,14 @@
 {
   "nav": {
-    "home": "",
+    "home": "Home",
     "about": "About Us",
     "mahamana": "Mahamana Ji",
     "objectives": "Members",
     "activities": "Activities",
     "gallery": "Gallery",
     "donation": "Donate Now",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "join": "Join Us"
   },
   "header": {
     "title": "Mahamana Malaviya Mission",
@@ -15,7 +16,7 @@
   },
   "hero": {
     "welcome": "Mahamana Malaviya Mission (Bihar Unit)",
-    "ready":"Welcomes You All",
+    "ready": "Welcomes You All",
     "mission": "",
     "joinBtn": "Become a member",
     "learnMoreBtn": "Learn More",
@@ -114,8 +115,8 @@
   "leadership": {
     "heading": "Visionary Leadership & Organizational Strength",
     "leaderName": "Shri Bipin Kumar Singh",
-    "post":"President",
-    "subpost":"Mahamana Malviya Mission (Bihar Unit)",
+    "post": "President",
+    "subpost": "Mahamana Malviya Mission (Bihar Unit)",
     "philosophy": "His leadership style is rooted in coordination, communication, and positive engagement. He envisions the mission not merely as an organization that conducts programs, but as a powerful ideological movement dedicated to nation-building.",
     "achievements": [
       "The organizational structure has been strengthened",
@@ -234,7 +235,7 @@
     "hoursText": "Monday - Saturday: 10:00 AM - 6:00 PM"
   },
   "footer": {
-    "copyright": "© 2026 Mahamana Malaviya Mission – Designed by Sumirayan Design.",
+    "copyright": "© {{year}} Mahamana Malaviya Mission (Bihar Unit). All rights reserved.",
     "tagline": "Education, Values, Nation Building"
   }
 }

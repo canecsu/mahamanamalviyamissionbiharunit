@@ -14,6 +14,7 @@ email-validator>=2.2.0
 # Authentication & Security
 PyJWT>=2.10.1
 passlib[bcrypt]>=1.7.4
+bcrypt==4.3.0  # Keep Passlib 1.7.4 compatible: bcrypt 5 raises ValueError during backend detection
 cryptography>=42.0.8
 
 # Optional: Development & Linting Tools (Only needed locally)

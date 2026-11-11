@@ -275,10 +275,11 @@ def create_crud_routes(path: str, table_name: str, model: BaseModel, include_pub
         res = supabase.table(table_name).insert(doc).execute()
         return handle_db_response(res, single=True)
 
-    @app.get(f"/{path}")
-    def list_items(include_unpublished: bool = Query(False)):
+    # Donation records contain personal data; only administrators may read them.
+    @app.get(f"/{path}", dependencies=[Depends(require_admin)] if table_name == "donations" else [])
+    def list_items():
         query = supabase.table(table_name).select("*")
-        if include_public_filter and not include_unpublished:
+        if include_public_filter:
             query = query.eq("published", True)
         res = query.order("created_at", desc=True).execute()
         return handle_db_response(res)
@@ -288,9 +289,12 @@ def create_crud_routes(path: str, table_name: str, model: BaseModel, include_pub
         res = supabase.table(table_name).select("*").order("created_at", desc=True).execute()
         return handle_db_response(res)
 
-    @app.get(f"/{path}/{{item_id}}")
+    @app.get(f"/{path}/{{item_id}}", dependencies=[Depends(require_admin)] if table_name == "donations" else [])
     def get_item(item_id: int):
-        res = supabase.table(table_name).select("*").eq("id", item_id).execute()
+        query = supabase.table(table_name).select("*").eq("id", item_id)
+        if include_public_filter:
+            query = query.eq("published", True)
+        res = query.execute()
         return handle_db_response(res, single=True)
 
     @app.put(f"/admin/{path}/{{item_id}}", dependencies=[Depends(require_admin)])
@@ -325,7 +329,7 @@ create_crud_routes("donations", "donations", DonationModel)
 
 @app.get("/pages/slug/{slug}")
 def get_page_by_slug(slug: str):
-    res = supabase.table("pages").select("*").eq("slug", slug).execute()
+    res = supabase.table("pages").select("*").eq("slug", slug).eq("published", True).execute()
     return handle_db_response(res, single=True)
 
 @app.get("/blogs/slug/{slug}")

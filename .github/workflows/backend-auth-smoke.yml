@@ -1,0 +1,41 @@
+name: Backend authentication smoke test
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches:
+      - fix/mmm-contact-security-preview-20261111
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  registration-password-hash:
+    name: Python registration hashing (Render runtime)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - name: Install actual backend dependencies
+        run: python -m pip install -r backend/requirements.txt
+      - name: Compile backend Python
+        run: python -m compileall -q backend
+      - name: Verify Passlib and bcrypt hash/verify
+        run: |
+          python - <<'PY'
+          from importlib.metadata import version
+          from passlib.context import CryptContext
+
+          assert version("bcrypt") == "4.3.0", version("bcrypt")
+          pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+          for password in ("Mahamana-Test-Not-A-Real-Password-2026!", "टेस्ट-Strong-Password-2026"):
+              digest = pwd_context.hash(password)
+              assert digest.startswith("$2b$")
+              assert pwd_context.verify(password, digest)
+              assert not pwd_context.verify(password + "-wrong", digest)
+          print("Password hashing and verification smoke test passed")
+          PY
