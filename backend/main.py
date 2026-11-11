@@ -47,6 +47,12 @@ if (
     raise RuntimeError("SUPABASE_URL must be a valid HTTPS service URL")
 if SUPABASE_KEY.upper().startswith(("YOUR_", "REPLACE_")) or len(SUPABASE_KEY) < 20:
     raise RuntimeError("SUPABASE_KEY is missing or appears to be a placeholder")
+
+# Optional deployment safety check for the verified Mahamana Supabase project.
+# A project ref is not a credential. Staging can set this without exposing keys.
+expected_supabase_ref = os.environ.get("EXPECTED_SUPABASE_PROJECT_REF", "").strip()
+if expected_supabase_ref and parsed_supabase_url.hostname != f"{expected_supabase_ref}.supabase.co":
+    raise RuntimeError("SUPABASE_URL does not match the expected Supabase project")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 Days
 
