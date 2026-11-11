@@ -18,6 +18,7 @@ import About from "./pages/About";
 import Mahamana from "./pages/Mahamana";
 import Members from "./pages/Objectives";
 import MissionObjectives from "./pages/MissionObjectives";
+import NotFound from "./pages/NotFound";
 import Activities from "./pages/Activities";
 import Gallery from "./pages/Gallery";
 import Join from "./pages/Join";
