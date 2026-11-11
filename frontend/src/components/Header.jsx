@@ -58,7 +58,8 @@ const Header = () => {
       items: [
         { path: '/about', label: t('nav.about') },
         { path: '/mahamana', label: t('nav.mahamana') },
-        { path: '/objectives', label: t('nav.objectives') }
+        { path: '/objectives', label: t('nav.objectives') },
+        { path: '/members', label: t('nav.members') }
       ]
     },
     { path: '/activities', label: t('nav.activities') },
@@ -66,14 +67,14 @@ const Header = () => {
       label: currentLanguage === 'hi' ? 'मीडिया' : 'Media',
       dropdown: true,
       items: [
-        { path: '/news', label: 'News' },
-        { path: '/events', label: 'Events' },
-        { path: '/blog', label: 'Blog' },
-        { path: '/video-tour', label: 'Video Tour' },
+        { path: '/news', label: t('nav.news') },
+        { path: '/events', label: t('nav.events') },
+        { path: '/blog', label: t('nav.blogs') },
+        { path: '/video-tour', label: t('nav.videos') },
         { path: '/gallery', label: t('nav.gallery') }
       ]
     },
-    { path: '/store', label: 'Store' },
+    { path: '/store', label: t('nav.store') },
     { path: '/contact', label: t('nav.contact') }
   ];
 
@@ -92,7 +93,7 @@ const Header = () => {
             {/* --- LEFT: Logo & Brand --- */}
             <Link to="/" className="flex items-center gap-2 group z-50 shrink-0" onClick={() => setMobileMenuOpen(false)}>
               <div className={`shrink-0 bg-gradient-to-br from-[#F4C430] to-[#ffd700] rounded-full flex items-center justify-center overflow-hidden shadow-lg border-2 border-[#111111] group-hover:scale-105 transition-transform duration-300 ${scrolled ? 'w-9 h-9 md:w-11 md:h-11' : 'w-11 h-11 md:w-14 md:h-14'}`}>
-                <img src="malviyamissionbiharlogo.png" alt="Logo" className="w-[85%] h-[85%] object-contain" />
+                <img src="/malviyamissionbiharlogo.png" alt="Logo" className="w-[85%] h-[85%] object-contain" />
               </div>
               <div className="hidden sm:block min-w-max">
                 <h1 
