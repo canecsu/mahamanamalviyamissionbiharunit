@@ -34,7 +34,8 @@ class FrontendIntegrityTests(unittest.TestCase):
         }
         keys = set()
         for path in [*SRC.rglob("*.js"), *SRC.rglob("*.jsx")]:
-            keys.update(re.findall(r'\\bt\\(["\\\']([\\w.]+)["\\\']', path.read_text()))
+            for quote in ("'", '"'):
+                keys.update(re.findall(r"\bt\(\s*" + re.escape(quote) + r"([\w.]+)" + re.escape(quote), path.read_text()))
         for lang, obj in translations.items():
             missing = sorted(key for key in keys if resolve(obj, key) is None)
             self.assertFalse(missing, f"{lang}: missing translation keys {missing}")
