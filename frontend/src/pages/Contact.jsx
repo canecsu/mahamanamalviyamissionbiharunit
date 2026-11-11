@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Youtube } from 'lucide-react';
 
 const Contact = () => {
   const { t, i18n } = useTranslation();
@@ -30,8 +30,9 @@ const Contact = () => {
                     <p
                       className="text-gray-700 leading-relaxed"
                       style={{ fontFamily: currentLanguage === 'hi' ? 'Noto Sans Devanagari, sans-serif' : 'Poppins, sans-serif' }}
-                      dangerouslySetInnerHTML={{ __html: t('contact.officeAddress') }}
-                    />
+                    >
+                      {t('contact.officeAddress')}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -45,7 +46,10 @@ const Contact = () => {
                     <h3 className="text-xl font-bold text-[#111111] mb-2" style={{ fontFamily: currentLanguage === 'hi' ? 'Noto Sans Devanagari, sans-serif' : 'Poppins, sans-serif' }}>
                       {t('contact.phone')}
                     </h3>
-                    <p className="text-gray-700">+91-9876543210</p>
+                    <div className="text-gray-700 flex flex-col gap-1">
+                      <a href="tel:+917992362557" className="hover:text-[#b8860b]">+91 79923 62557</a>
+                      <a href="tel:+917209329329" className="hover:text-[#b8860b]">+91 72093 29329</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -59,7 +63,7 @@ const Contact = () => {
                     <h3 className="text-xl font-bold text-[#111111] mb-2" style={{ fontFamily: currentLanguage === 'hi' ? 'Noto Sans Devanagari, sans-serif' : 'Poppins, sans-serif' }}>
                       {t('contact.email')}
                     </h3>
-                    <p className="text-gray-700">biharunit@malaviyamission.org</p>
+                    <a href="mailto:mmmbiharunit@gmail.com" className="text-gray-700 break-all hover:text-[#b8860b]">mmmbiharunit@gmail.com</a>
                   </div>
                 </div>
               </div>
@@ -84,7 +88,7 @@ const Contact = () => {
             {/* Map */}
             <div className="bg-white border-2 border-[#F4C430] rounded-lg overflow-hidden shadow-lg">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d472.56646845799855!2d85.03327304569397!3d25.561545388451034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f2a9edfd9c7c1d%3A0x2e74b8c58b242e2c!2sHari%20Nagar%20township%2C%20Phuliya%20tola%20road%2C%20near%20AIIMS%20Road%2C%20Patna%2C%20Bihar%20801505!5e0!3m2!1sen!2sin!4v1775468014772!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d472.56646845799855!2d85.03327304569397!3d25.561545388451034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f2a9edfd9c7c1d%3A0x2e74b8c58b242e2c!2sHari%20Nagar%20township%2C%20Phuliya%20tola%20road%2C%20near%20AIIMS%20Road%2C%20Patna%2C%20Bihar%20801505!5e0!3m2!1sen!2sin!4v1775468014772!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0, minHeight: '500px' }}
@@ -93,6 +97,23 @@ const Contact = () => {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Office Location"
               ></iframe>
+            </div>
+          </div>
+          <div className="mt-10 border-t border-gray-100 pt-7 flex flex-col sm:flex-row justify-center items-center gap-4">
+            <span className="text-gray-700 font-semibold">
+              {currentLanguage === 'hi' ? 'सोशल मीडिया पर हमसे जुड़ें' : 'Connect with us on social media'}
+            </span>
+            <div className="flex items-center gap-3">
+              {[
+                { label: 'Facebook', icon: Facebook, href: 'https://www.facebook.com/profile.php?id=100095027776223' },
+                { label: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/mahamana_malviya_mission_bihar/' },
+                { label: 'YouTube', icon: Youtube, href: 'https://www.youtube.com/@MahamanaMalviyaMissionBihar/shorts' }
+              ].map(({ label, icon: Icon, href }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                   className="w-11 h-11 rounded-full border border-[#F4C430] text-[#111111] flex items-center justify-center hover:bg-[#F4C430] transition-colors">
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
           </div>
         </div>
