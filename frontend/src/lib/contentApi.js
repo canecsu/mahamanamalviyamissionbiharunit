@@ -1,6 +1,4 @@
-const DEFAULT_API_URL = "https://mahamanamalviyamissionbiharunit.onrender.com";
-const configuredApi = process.env.REACT_APP_ADMIN_API_URL || DEFAULT_API_URL;
-const API_BASE = configuredApi.replace(/\/+$/, "").replace(/\/docs$/, "");
+import { apiUrl } from "./apiConfig";
 
 const PUBLIC_COLLECTIONS = new Set([
   "pages", "gallery", "members", "news", "activities",
@@ -8,7 +6,7 @@ const PUBLIC_COLLECTIONS = new Set([
 ]);
 
 async function request(path, options = {}) {
-  const response = await fetch(`${API_BASE}${path}`, {
+  const response = await fetch(apiUrl(path), {
     signal: options.signal,
     headers: { Accept: "application/json" }
   });
