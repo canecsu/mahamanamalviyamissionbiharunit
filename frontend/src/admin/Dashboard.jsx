@@ -90,7 +90,7 @@ export default function Dashboard() {
       </section>
 
       <div className="mm-dashboard-gate" aria-hidden="true">
-        <img src="/admin-bhu-gate-watercolor.jpg" alt="" loading="lazy" />
+        <img src="/admin-bhu-gate-watercolor.svg" alt="" loading="lazy" />
       </div>
       <p className="mm-dashboard-footer-note">Mahamana Malaviya Mission · Bihar Unit <span>•</span> Website Administration</p>
     </div>
