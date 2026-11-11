@@ -1,17 +1,23 @@
+import logging
 import os
+from urllib.parse import urlsplit
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
+import httpx
 import jwt
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, HTTPException, Query, status
+from fastapi import Depends, FastAPI, HTTPException, Query, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from passlib.context import CryptContext
 from pydantic import BaseModel, EmailStr, Field
+from postgrest import APIError
 from supabase import Client, create_client
 
+logger = logging.getLogger("mahamana.api")
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / ".env")
 
@@ -28,6 +34,19 @@ if not SUPABASE_URL or not SUPABASE_KEY:
     raise RuntimeError("Supabase credentials are missing: set SUPABASE_URL and SUPABASE_KEY in Render")
 if not SECRET_KEY or len(SECRET_KEY) < 32:
     raise RuntimeError("SECRET_KEY must be configured as a strong 32+ character secret in Render")
+
+# Fail fast on invalid connection settings, not only empty values. This does
+# not connect to the database, nor expose any server-side credential.
+parsed_supabase_url = urlsplit(SUPABASE_URL)
+if (
+    parsed_supabase_url.scheme != "https"
+    or not parsed_supabase_url.hostname
+    or parsed_supabase_url.username
+    or parsed_supabase_url.password
+):
+    raise RuntimeError("SUPABASE_URL must be a valid HTTPS service URL")
+if SUPABASE_KEY.upper().startswith(("YOUR_", "REPLACE_")) or len(SUPABASE_KEY) < 20:
+    raise RuntimeError("SUPABASE_KEY is missing or appears to be a placeholder")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 Days
 
@@ -36,18 +55,45 @@ security = HTTPBearer()
 
 app = FastAPI(title="Mahamana Admin API")
 
-# ==========================================
-# THE SILVER BULLET CORS FIX
-# ==========================================
-# Since we are using Bearer tokens in headers, we don't need credentials=True.
-# This allows us to use a wildcard "*" safely and stops Vercel CORS blocking.
+# CORS restricts browser origins, not API authorization. Explicit backend
+# admin/JWT checks remain mandatory for all private operations.
+# Add custom domains/local dev explicitly with CORS_ALLOWED_ORIGINS on Render.
+DEFAULT_ORIGINS = ("https://mahamanamalviyamissionbiharunit-two.vercel.app",)
+configured_origins = tuple(
+    origin.strip().rstrip("/")
+    for origin in os.environ.get("CORS_ALLOWED_ORIGINS", "").split(",")
+    if origin.strip()
+)
+ALLOWED_ORIGINS = list(dict.fromkeys(DEFAULT_ORIGINS + configured_origins))
+# The Vercel project creates a different *project-specific* preview URL per
+# commit. This is deliberately narrower than allowing all origins.
+PREVIEW_ORIGIN_PATTERN = r"^https://mahamanamalviyamissionbiharunit-[a-z0-9]+\\.vercel\\.app$"
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_origin_regex=PREVIEW_ORIGIN_PATTERN,
     allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type", "Accept"],
 )
+
+
+@app.exception_handler(httpx.RequestError)
+async def handle_upstream_transport_error(request: Request, exc: httpx.RequestError):
+    # DNS/network failures must never leak database URLs, keys or stack traces
+    # in public API responses.
+    logger.warning("Database transport unavailable (%s)", type(exc).__name__)
+    return JSONResponse(
+        status_code=503,
+        headers={"Retry-After": "30"},
+        content={"detail": "Database service temporarily unavailable"},
+    )
+
+
+@app.exception_handler(APIError)
+async def handle_database_api_error(request: Request, exc: APIError):
+    logger.warning("Database API request failed (%s)", type(exc).__name__)
+    return JSONResponse(status_code=502, content={"detail": "Database request failed"})
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
