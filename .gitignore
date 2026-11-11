@@ -1,0 +1,25 @@
+# Credentials must never be committed
+.env
+.env.*
+!**/.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+
+# Frontend
+node_modules/
+build/
+dist/
+coverage/
+*.log
+
+# Tools / OS
+.DS_Store
+.idea/
+.vscode/
