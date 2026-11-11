@@ -22,7 +22,7 @@
   },
   "hero": {
     "welcome": "Mahamana Malaviya Mission (Bihar Unit)",
-    "ready": "Welcomes You All",
+    "ready": "We Welcome You",
     "mission": "",
     "joinBtn": "Become a member",
     "learnMoreBtn": "Learn More",
@@ -62,7 +62,8 @@
     "content2": "The Bihar Unit was formed to fulfill Malaviya Ji's vision on the sacred land of Bihar, a region known for its ancient heritage of knowledge and culture. It comprises a dedicated group of alumni from Bihar associated with Banaras Hindu University, along with individuals committed to social service.",
     "content3": "This unit functions in alignment with the principles and guidance of the Mahamana Malaviya Mission at the national level.",
     "missionTitle": "Mission Statement",
-    "missionText": "To build a society where education is combined with strong moral values and patriotism, propagating the ideals, vision, and nation-building philosophy of Mahamana Pandit Madan Mohan Malaviya Ji in every sphere of society."
+    "missionText": "To build a society where education is combined with strong moral values and patriotism, propagating the ideals, vision, and nation-building philosophy of Mahamana Pandit Madan Mohan Malaviya Ji in every sphere of society.",
+    "subheading": "Discover the mission, its ideals and its work across Bihar."
   },
   "objectives": {
     "heading": "Objectives & Areas of Work",
@@ -122,7 +123,7 @@
     "heading": "Visionary Leadership & Organizational Strength",
     "leaderName": "Shri Bipin Kumar Singh",
     "post": "President",
-    "subpost": "Mahamana Malviya Mission (Bihar Unit)",
+    "subpost": "Mahamana Malaviya Mission (Bihar Unit)",
     "philosophy": "His leadership style is rooted in coordination, communication, and positive engagement. He envisions the mission not merely as an organization that conducts programs, but as a powerful ideological movement dedicated to nation-building.",
     "achievements": [
       "The organizational structure has been strengthened",
@@ -271,5 +272,9 @@
     "backToBlogs": "Back to blog",
     "photos": "photos",
     "storeNotice": "Please contact the mission directly for product enquiries."
+  },
+  "malviya": {
+    "quote": "Inspired by a lifelong commitment to education, character and service.",
+    "description": "Founder of Banaras Hindu University and an influential contributor to India's freedom movement, Mahamana Pandit Madan Mohan Malaviya continues to inspire service, education and social harmony."
   }
 }
