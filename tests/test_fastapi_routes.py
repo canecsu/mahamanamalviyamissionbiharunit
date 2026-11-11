@@ -13,6 +13,7 @@ from types import SimpleNamespace
 from unittest.mock import patch
 
 try:
+    import httpx
     import supabase
     from fastapi.testclient import TestClient
 except ImportError:
@@ -51,6 +52,8 @@ class FakeDB:
         self.failing = failing
 
     def table(self, name):
+        if self.failing == "transport":
+            raise httpx.ConnectError("fake database hostname + sensitive information")
         if self.failing:
             raise RuntimeError("simulated DB offline; never expose this in API")
         return FakeQuery(name, self.queries)
@@ -90,6 +93,56 @@ class BackendRouteTests(unittest.TestCase):
         res = self.client.get("/readyz")
         self.assertEqual(res.status_code, 503)
         self.assertEqual(res.json(), {"detail": "Database is not ready"})
+
+    def test_unreachable_database_returns_sanitized_503(self):
+        self.module.supabase = FakeDB(failing="transport")
+        result = self.client.get("/news")
+        self.assertEqual(result.status_code, 503)
+        self.assertEqual(result.json(), {"detail": "Database service temporarily unavailable"})
+        self.assertEqual(result.headers.get("retry-after"), "30")
+        self.assertNotIn("hostname", result.text)
+        self.assertNotIn("sensitive", result.text)
+
+    def test_official_website_cors_preflight(self):
+        result = self.client.options(
+            "/auth/login",
+            headers={
+                "Origin": "https://mahamanamalviyamissionbiharunit-two.vercel.app",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "content-type",
+            },
+        )
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(
+            result.headers.get("access-control-allow-origin"),
+            "https://mahamanamalviyamissionbiharunit-two.vercel.app",
+        )
+
+    def test_branch_preview_cors_preflight(self):
+        result = self.client.options(
+            "/auth/login",
+            headers={
+                "Origin": "https://mahamanamalviyamissionbiharunit-gwxhmvoq8.vercel.app",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "authorization",
+            },
+        )
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(
+            result.headers.get("access-control-allow-origin"),
+            "https://mahamanamalviyamissionbiharunit-gwxhmvoq8.vercel.app",
+        )
+
+    def test_untrusted_origin_is_not_allowed(self):
+        result = self.client.options(
+            "/auth/login",
+            headers={
+                "Origin": "https://unrelated-example.invalid",
+                "Access-Control-Request-Method": "POST",
+                "Access-Control-Request-Headers": "content-type",
+            },
+        )
+        self.assertNotIn("access-control-allow-origin", result.headers)
 
     def test_public_donor_records_reject_anonymous_users(self):
         for url in ("/donations", "/donations/1", "/admin/donations"):
