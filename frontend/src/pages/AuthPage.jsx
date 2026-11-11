@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext'; 
 import { Mail, Lock, User, AlertCircle, ArrowRight, ShieldCheck } from 'lucide-react';
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const { t } = useTranslation();
   const { login, register } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,15 +68,15 @@ const AuthPage = () => {
           </div>
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-[#111111]">
-          {isLogin ? 'Sign in to your account' : 'Create a new account'}
+          {isLogin ? t('auth.signInTitle') : t('auth.createTitle')}
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          {isLogin ? "Don't have an account? " : "Already have an account? "}
+          {isLogin ? t('auth.noAccount') : t('auth.haveAccount')}
           <button 
             onClick={toggleMode}
             className="font-medium text-[#F4C430] hover:text-[#d4aa20] transition-colors"
           >
-            {isLogin ? 'Sign up' : 'Log in'}
+            {isLogin ? t('auth.signUp') : t('auth.logIn')}
           </button>
         </p>
       </div>
@@ -93,7 +95,7 @@ const AuthPage = () => {
             
             {!isLogin && (
               <div className="animate-fadeIn">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('auth.fullName')}</label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <User className="h-5 w-5 text-gray-400" />
@@ -105,14 +107,14 @@ const AuthPage = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     className="block w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-[#111111] focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430] outline-none transition-all bg-gray-50 focus:bg-white"
-                    placeholder="John Doe"
+                    placeholder={t('auth.fullNamePlaceholder')}
                   />
                 </div>
               </div>
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('auth.email')}</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <Mail className="h-5 w-5 text-gray-400" />
@@ -124,13 +126,13 @@ const AuthPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   className="block w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-[#111111] focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430] outline-none transition-all bg-gray-50 focus:bg-white"
-                  placeholder="you@example.com"
+                  placeholder={t('auth.emailPlaceholder')}
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">{t('auth.password')}</label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <Lock className="h-5 w-5 text-gray-400" />
@@ -155,10 +157,10 @@ const AuthPage = () => {
                 className="w-full flex justify-center items-center gap-2 py-3.5 px-4 border border-transparent rounded-xl shadow-md text-base font-bold text-white bg-[#111111] hover:bg-[#F4C430] hover:text-[#111111] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#111111] transition-all disabled:opacity-70 disabled:cursor-not-allowed group"
               >
                 {status.loading ? (
-                  <span className="animate-pulse">Processing...</span>
+                  <span className="animate-pulse">{t('auth.processing')}</span>
                 ) : (
                   <>
-                    {isLogin ? 'Sign In' : 'Create Account'}
+                    {isLogin ? t('auth.signIn') : t('auth.createAccount')}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
