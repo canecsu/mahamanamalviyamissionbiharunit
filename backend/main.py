@@ -67,7 +67,7 @@ configured_origins = tuple(
 ALLOWED_ORIGINS = list(dict.fromkeys(DEFAULT_ORIGINS + configured_origins))
 # The Vercel project creates a different *project-specific* preview URL per
 # commit. This is deliberately narrower than allowing all origins.
-PREVIEW_ORIGIN_PATTERN = r"^https://mahamanamalviyamissionbiharunit-[a-z0-9]+\\.vercel\\.app$"
+PREVIEW_ORIGIN_PATTERN = r"^https://mahamanamalviyamissionbiharunit-[a-z0-9]+\.vercel\.app$"
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
