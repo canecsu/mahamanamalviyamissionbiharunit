@@ -41,6 +41,14 @@ class BackendStartupTests(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("SUPABASE_KEY is missing or appears to be a placeholder", result.stderr)
 
+    def test_wrong_supabase_project_rejected_before_connecting(self):
+        result = self._launch_with({
+            "SUPABASE_URL": "https://wrong-project-ref.supabase.co",
+            "EXPECTED_SUPABASE_PROJECT_REF": "ncqpxyiuqlrnfuurvzah",
+        })
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("SUPABASE_URL does not match the expected Supabase project", result.stderr)
+
     def test_short_jwt_secret_rejected(self):
         result = self._launch_with({"SECRET_KEY": "dev-key"})
         self.assertNotEqual(result.returncode, 0)
