@@ -82,7 +82,7 @@ export default function PagesManager({ type = "pages" }) {
   const filtered = rows.filter((r) => JSON.stringify(r).toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <div className="space-y-4">
+    <div className="mm-manager space-y-4">
       <h1 className="text-2xl font-bold capitalize">{type} Manager</h1>
       {error && <div className="p-3 border border-red-300 bg-red-50 text-red-700 rounded">{error}</div>}
       <div className="grid lg:grid-cols-2 gap-4">
