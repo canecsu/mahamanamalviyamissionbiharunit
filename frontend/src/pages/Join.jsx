@@ -33,16 +33,19 @@ const Join = () => {
       return;
     }
 
-    // Simulate form submission
-    toast.success(t('join.successMsg', 'Membership application submitted successfully!'));
-    setFormData({
-      name: '',
-      fatherName: '',
-      address: '',
-      phone: '',
-      email: '',
-      occupation: ''
-    });
+    // No membership API exists yet. Open a draft in the visitor's mail app;
+    // the visitor must explicitly send it to submit the application.
+    const subject = currentLanguage === "hi" ? "सदस्यता आवेदन - महामना मालवीय मिशन" : "Membership Enquiry - Mahamana Malaviya Mission";
+    const message = [
+      `Name: ${formData.name}`,
+      `Father's name: ${formData.fatherName}`,
+      `Phone: ${formData.phone}`,
+      `Email: ${formData.email}`,
+      `Address: ${formData.address}`,
+      `Occupation: ${formData.occupation}`
+    ].join("\\n");
+    window.location.href = `mailto:mmmbiharunit@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    toast.info(t('join.emailDraftNotice'));
   };
 
   // Membership Benefits Data for the right column
@@ -240,12 +243,12 @@ const Join = () => {
                       className="group w-full bg-[#111111] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#F4C430] hover:text-[#111111] transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
                       style={getFont()}
                     >
-                      {t('join.submitBtn', 'Submit Application')}
+                      {t('join.emailApplication', 'Prepare email application')}
                       <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                     </button>
                     <p className="text-center text-xs text-gray-500 mt-4 flex items-center justify-center gap-1">
                       <ShieldCheck className="w-4 h-4" /> 
-                      {currentLanguage === 'hi' ? 'आपकी जानकारी पूरी तरह सुरक्षित है।' : 'Your information is completely secure.'}
+                      {t('join.emailDisclaimer')}
                     </p>
                   </div>
                 </form>

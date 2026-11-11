@@ -3,12 +3,18 @@
     "home": "Home",
     "about": "About Us",
     "mahamana": "Mahamana Ji",
-    "objectives": "Members",
+    "objectives": "Objectives",
     "activities": "Activities",
     "gallery": "Gallery",
     "donation": "Donate Now",
     "contact": "Contact Us",
-    "join": "Join Us"
+    "join": "Join Us",
+    "members": "Members",
+    "news": "News",
+    "events": "Events",
+    "blogs": "Blog",
+    "videos": "Video Tour",
+    "store": "Store"
   },
   "header": {
     "title": "Mahamana Malaviya Mission",
@@ -16,7 +22,7 @@
   },
   "hero": {
     "welcome": "Mahamana Malaviya Mission (Bihar Unit)",
-    "ready": "Welcomes You All",
+    "ready": "We Welcome You",
     "mission": "",
     "joinBtn": "Become a member",
     "learnMoreBtn": "Learn More",
@@ -56,7 +62,8 @@
     "content2": "The Bihar Unit was formed to fulfill Malaviya Ji's vision on the sacred land of Bihar, a region known for its ancient heritage of knowledge and culture. It comprises a dedicated group of alumni from Bihar associated with Banaras Hindu University, along with individuals committed to social service.",
     "content3": "This unit functions in alignment with the principles and guidance of the Mahamana Malaviya Mission at the national level.",
     "missionTitle": "Mission Statement",
-    "missionText": "To build a society where education is combined with strong moral values and patriotism, propagating the ideals, vision, and nation-building philosophy of Mahamana Pandit Madan Mohan Malaviya Ji in every sphere of society."
+    "missionText": "To build a society where education is combined with strong moral values and patriotism, propagating the ideals, vision, and nation-building philosophy of Mahamana Pandit Madan Mohan Malaviya Ji in every sphere of society.",
+    "subheading": "Discover the mission, its ideals and its work across Bihar."
   },
   "objectives": {
     "heading": "Objectives & Areas of Work",
@@ -116,7 +123,7 @@
     "heading": "Visionary Leadership & Organizational Strength",
     "leaderName": "Shri Bipin Kumar Singh",
     "post": "President",
-    "subpost": "Mahamana Malviya Mission (Bihar Unit)",
+    "subpost": "Mahamana Malaviya Mission (Bihar Unit)",
     "philosophy": "His leadership style is rooted in coordination, communication, and positive engagement. He envisions the mission not merely as an organization that conducts programs, but as a powerful ideological movement dedicated to nation-building.",
     "achievements": [
       "The organizational structure has been strengthened",
@@ -205,7 +212,12 @@
   "donation": {
     "description": "Support the Vision of Service and Education",
     "upiLabel": "7209329329m.pnb",
-    "scanToDonate": "Scan to Donate"
+    "scanToDonate": "Scan to Donate",
+    "heading": "Support the Mission",
+    "instructions": "Your contribution can support the mission's initiatives in education, values and social service. Please contact our Bihar Unit team for verified contribution information.",
+    "safetyNote": "For your security, confirm the official payment details with the mission before making any transfer. No online payment is processed on this page.",
+    "emailUs": "Enquire by Email",
+    "contactPage": "View all contact details"
   },
   "join": {
     "heading": "Join this Noble Mission",
@@ -223,7 +235,10 @@
     "ifsc": "IFSC Code",
     "bank": "Bank Name",
     "successMsg": "Thank you for joining! We will contact you soon.",
-    "errorMsg": "Please fill all required fields."
+    "errorMsg": "Please fill all required fields.",
+    "emailApplication": "Continue by Email",
+    "emailDraftNotice": "An email draft has been prepared. Please send it from your email application to complete your enquiry.",
+    "emailDisclaimer": "This form opens a draft in your email app. No application is saved on the website until a membership system is activated."
   },
   "contact": {
     "heading": "Contact Us",
@@ -237,5 +252,29 @@
   "footer": {
     "copyright": "© {{year}} Mahamana Malaviya Mission (Bihar Unit). All rights reserved.",
     "tagline": "Education, Values, Nation Building"
+  },
+  "content": {
+    "activities": "Activities",
+    "news": "Latest News",
+    "events": "Events by Year",
+    "blogs": "Blog",
+    "videos": "Video Tour",
+    "store": "Store",
+    "empty": "No published content is available yet.",
+    "loading": "Loading…",
+    "error": "Unable to load content right now.",
+    "tryAgain": "Please try again later.",
+    "notFound": "This page was not found.",
+    "readMore": "Read more",
+    "openEvent": "View event",
+    "watchVideo": "Watch video",
+    "backToEvents": "Back to events",
+    "backToBlogs": "Back to blog",
+    "photos": "photos",
+    "storeNotice": "Please contact the mission directly for product enquiries."
+  },
+  "malviya": {
+    "quote": "Inspired by a lifelong commitment to education, character and service.",
+    "description": "Founder of Banaras Hindu University and an influential contributor to India's freedom movement, Mahamana Pandit Madan Mohan Malaviya continues to inspire service, education and social harmony."
   }
 }

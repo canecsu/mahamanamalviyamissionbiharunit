@@ -20,10 +20,20 @@ i18n
   .init({
     resources,
     fallbackLng: 'en',
+    supportedLngs: ['en', 'hi'],
+    load: 'languageOnly',
     lng: localStorage.getItem('language') || 'en',
     interpolation: {
       escapeValue: false
     }
   });
+
+const updatePageLanguage = (lang) => {
+  if (typeof document !== 'undefined') {
+    document.documentElement.lang = String(lang || 'en').startsWith('hi') ? 'hi' : 'en';
+  }
+};
+i18n.on('languageChanged', updatePageLanguage);
+updatePageLanguage(i18n.language);
 
 export default i18n;

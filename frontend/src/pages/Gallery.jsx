@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getPublic } from '../lib/contentApi';
 import { 
   ZoomIn, Camera, X, ArrowLeft, Calendar, 
   Images, ChevronLeft, ChevronRight, Loader2, AlertCircle 
@@ -9,8 +10,6 @@ const Gallery = () => {
   const { t, i18n } = useTranslation();
   const currentLanguage = i18n.language;
   
-  // Base API URL
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
   // State for Data
   const [albums, setAlbums] = useState([]);
@@ -30,11 +29,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchAlbums = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/events`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch gallery albums.');
-        }
-        const data = await response.json();
+        const data = await getPublic("events");
         
         // Filter out events that don't have any images, then format them
         const formattedAlbums = data
@@ -60,7 +55,7 @@ const Gallery = () => {
     };
 
     fetchAlbums();
-  }, [API_BASE_URL]);
+  }, []);
 
   // Prevent scrolling on the body when the modal is open
   useEffect(() => {
@@ -113,7 +108,7 @@ const Gallery = () => {
         <div className="container mx-auto px-4 max-w-7xl relative z-10">
           <div className="text-center max-w-3xl mx-auto">
             <span className="text-[#F4C430] font-bold tracking-widest uppercase mb-4 flex justify-center items-center gap-2 text-sm" style={getFont()}>
-              <Camera className="w-4 h-4" /> Visual Journey
+              <Camera className="w-4 h-4" /> {currentLanguage === "hi" ? "हमारी यादें" : "Visual Journey"}
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#111111] mb-6 tracking-tight" style={getFont()}>
               {selectedAlbum ? selectedAlbum.title : t('gallery.heading', 'Event Gallery')}
@@ -142,14 +137,14 @@ const Gallery = () => {
           ) : error ? (
             <div className="flex flex-col items-center justify-center py-20 bg-red-50 rounded-3xl border border-red-100">
               <AlertCircle className="w-16 h-16 text-red-400 mb-4" />
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Failed to load gallery</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">{currentLanguage === "hi" ? "गैलरी लोड नहीं हो सकी" : "Failed to load gallery"}</h3>
               <p className="text-gray-500">{error}</p>
             </div>
           ) : albums.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 bg-gray-50 rounded-3xl border border-gray-100">
               <Images className="w-16 h-16 text-gray-300 mb-4" />
-              <h3 className="text-xl font-bold text-gray-800 mb-2">No Images Found</h3>
-              <p className="text-gray-500">Check back later for updates to our event gallery.</p>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">{currentLanguage === "hi" ? "अभी कोई फोटो उपलब्ध नहीं है" : "No images found"}</h3>
+              <p className="text-gray-500">{currentLanguage === "hi" ? "नई तस्वीरों के लिए फिर से देखें।" : "Check back later for new photos."}</p>
             </div>
           ) : !selectedAlbum ? (
             

@@ -312,7 +312,7 @@ def create_crud_routes(path: str, table_name: str, model: BaseModel, include_pub
         return {"deleted": True, "id": item_id}
 
 # Initialize all CRUD routes
-create_crud_routes("pages", "pages", PageModel)
+create_crud_routes("pages", "pages", PageModel, include_public_filter=True)
 create_crud_routes("gallery", "gallery", GalleryItemModel)
 create_crud_routes("members", "members", MemberModel)
 create_crud_routes("news", "news", NewsModel, include_public_filter=True)
