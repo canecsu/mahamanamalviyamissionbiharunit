@@ -1,4 +1,4 @@
-const API_BASE = process.env.REACT_APP_ADMIN_API_URL || "https://mahamanamalviyamissionbiharunit.onrender.com";
+import { apiUrl } from "../lib/apiConfig";
 
 export const CONTENT_TYPES = [
   "pages",
@@ -26,7 +26,7 @@ function headers(json = true) {
 }
 
 async function request(path, options = {}) {
-  const res = await fetch(`${API_BASE}${path}`, options);
+  const res = await fetch(apiUrl(path), options);
   if (!res.ok) {
     let message = "Request failed";
     try {
