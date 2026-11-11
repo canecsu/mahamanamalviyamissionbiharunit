@@ -1,4 +1,9 @@
 import os
+import base64
+import json
+import logging
+
+import httpx
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -28,6 +33,52 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer()
 
 app = FastAPI(title="Mahamana Admin API")
+
+# Read-only diagnostic: check which API key *category* the server is using.
+# Never print the key, JWT payload, response body, or request headers.
+_key_logger = logging.getLogger("mahamana.supabase.key_audit")
+
+
+def _server_key_category(value: str) -> str:
+    if value.startswith("sb_secret_"):
+        return "modern-secret"
+    if value.startswith("sb_publishable_"):
+        return "modern-publishable"
+    if value.count(".") == 2:
+        try:
+            payload_segment = value.split(".")[1]
+            decoded = base64.urlsafe_b64decode(payload_segment + "=" * (-len(payload_segment) % 4))
+            role = json.loads(decoded.decode("utf-8")).get("role")
+            if role == "service_role":
+                return "legacy-service-role"
+            if role == "anon":
+                return "legacy-anon"
+            return "legacy-jwt-other-role"
+        except (ValueError, UnicodeError, TypeError):
+            return "jwt-unrecognized"
+    return "unknown"
+
+
+@app.on_event("startup")
+async def _check_supabase_server_key():
+    # Supabase's REST OpenAPI root accepts privileged server keys;
+    # this request performs no database mutation and logs no credentials.
+    _key_logger.warning(
+        "Supabase server credential category=%s; surrounding_whitespace=%s",
+        _server_key_category(SUPABASE_KEY),
+        SUPABASE_KEY != SUPABASE_KEY.strip(),
+    )
+    try:
+        async with httpx.AsyncClient(timeout=8) as client:
+            response = await client.get(
+                SUPABASE_URL.rstrip("/") + "/rest/v1/",
+                headers={"apikey": SUPABASE_KEY, "Accept": "application/openapi+json"},
+            )
+        _key_logger.warning("Supabase privileged API probe HTTP status=%s", response.status_code)
+    except httpx.HTTPError:
+        _key_logger.warning("Supabase privileged API probe could not connect")
+
+
 
 # ==========================================
 # THE SILVER BULLET CORS FIX
