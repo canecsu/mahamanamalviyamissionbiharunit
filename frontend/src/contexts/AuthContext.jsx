@@ -32,9 +32,12 @@ export const AuthProvider = ({ children }) => {
         if (response.ok) {
           const userData = await response.json();
           setUser(userData);
-        } else {
-          // Token is invalid/expired
+        } else if (response.status === 401 || response.status === 403) {
+          // A confirmed invalid or expired token is safe to clear.
           logout();
+        } else {
+          // A transient 5xx is not proof that a valid session is invalid.
+          setUser(null);
         }
       } catch (error) {
         // A temporary network or cold-start failure must not erase a valid session.
