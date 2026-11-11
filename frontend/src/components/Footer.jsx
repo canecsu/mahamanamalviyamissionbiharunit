@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Mail, Phone, ChevronRight, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Mail, Phone, ChevronRight, MapPin } from 'lucide-react';
 
 const Footer = () => {
   const { t, i18n } = useTranslation();
@@ -26,7 +26,7 @@ const Footer = () => {
           <div className="lg:col-span-5 pr-0 lg:pr-12">
             <Link to="/" className="flex items-center gap-4 mb-8 group inline-flex">
               <div className="w-14 h-14 shrink-0 bg-gradient-to-br from-[#F4C430] to-[#ffd700] rounded-full flex items-center justify-center overflow-hidden shadow-lg border-2 border-[#111111] group-hover:scale-105 transition-transform duration-300">
-                <img src="malviyamissionbiharlogo.png" alt="Logo" className="w-[85%] h-[85%] object-contain" />
+                <img src="/malviyamissionbiharlogo.png" alt="Logo" className="w-[85%] h-[85%] object-contain" />
               </div>
               <div>
                 <h3 className="text-2xl font-extrabold text-white tracking-tight group-hover:text-[#F4C430] transition-colors duration-300" style={getFont()}>
@@ -41,15 +41,17 @@ const Footer = () => {
             {/* Social Icons */}
             <div className="flex gap-4">
               {[
-                { icon: Facebook, href: '#' },
-                { icon: Twitter, href: '#' },
-                { icon: Instagram, href: '#' }
+                { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=100095027776223', label: 'Facebook' },
+                { icon: Instagram, href: 'https://www.instagram.com/mahamana_malviya_mission_bihar/', label: 'Instagram' },
+                { icon: Youtube, href: 'https://www.youtube.com/@MahamanaMalviyaMissionBihar/shorts', label: 'YouTube' }
               ].map((social, idx) => (
                 <a 
                   key={idx} 
-                  href={social.href} 
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-11 h-11 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-gray-300 hover:bg-[#F4C430] hover:text-[#111111] hover:border-[#F4C430] transform hover:-translate-y-1 transition-all duration-300 shadow-sm"
-                  aria-label="Social Media Link"
+                  aria-label={social.label}
                 >
                   <social.icon className="w-5 h-5" />
                 </a>
@@ -98,25 +100,27 @@ const Footer = () => {
                 </div>
                 <div className="pt-2">
                   <p className="text-gray-400 text-sm leading-relaxed" style={getFont()}>
-                    Mahamana Malviya Mission<br/>
-                    Bihar State Unit, India
+                    {t('contact.officeAddress')}
                   </p>
                 </div>
               </div>
 
-              <a href="tel:+919876543210" className="flex items-center gap-4 group hover:text-white transition-colors">
+              <div className="flex items-start gap-4 group">
                 <div className="w-10 h-10 bg-[#F4C430]/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-[#F4C430] transition-colors duration-300">
                   <Phone className="text-[#F4C430] w-5 h-5 group-hover:text-[#111111] transition-colors duration-300" />
                 </div>
-                <span className="text-gray-400 group-hover:text-white transition-colors text-sm" style={getFont()}>+91-9876543210</span>
-              </a>
+                <div className="flex flex-col gap-1 pt-1">
+                  <a href="tel:+917992362557" className="text-gray-400 hover:text-white transition-colors text-sm" style={getFont()}>+91 79923 62557</a>
+                  <a href="tel:+917209329329" className="text-gray-400 hover:text-white transition-colors text-sm" style={getFont()}>+91 72093 29329</a>
+                </div>
+              </div>
 
-              <a href="mailto:biharunit@malaviyamission.org" className="flex items-center gap-4 group hover:text-white transition-colors">
+              <a href="mailto:mmmbiharunit@gmail.com" className="flex items-center gap-4 group hover:text-white transition-colors">
                 <div className="w-10 h-10 bg-[#F4C430]/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-[#F4C430] transition-colors duration-300">
                   <Mail className="text-[#F4C430] w-5 h-5 group-hover:text-[#111111] transition-colors duration-300" />
                 </div>
                 <span className="text-gray-400 group-hover:text-white transition-colors text-sm break-all" style={getFont()}>
-                  biharunit@malaviyamission.org
+                  {t('contact.email')}
                 </span>
               </a>
             </div>
@@ -127,13 +131,16 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm text-center md:text-left" style={getFont()}>
-            {t('footer.copyright', `© ${new Date().getFullYear()} Mahamana Malviya Mission Bihar. All rights reserved.`)}
+            {t('footer.copyright', { year: new Date().getFullYear() })}
           </p>
           
-          <div className="flex gap-6 text-sm text-gray-500">
-            <Link to="/privacy-policy" className="hover:text-[#F4C430] transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-[#F4C430] transition-colors">Terms of Service</Link>
-          </div>
+          <p className="text-gray-400 text-sm text-center md:text-right" style={getFont()}>
+            Designed &amp; Managed by{' '}
+            <a href="https://sumirayandesign.com" target="_blank" rel="noopener noreferrer"
+               className="font-semibold text-[#F4C430] hover:text-white transition-colors underline-offset-4 hover:underline">
+              Sumirayan Design
+            </a>
+          </p>
         </div>
 
       </div>
