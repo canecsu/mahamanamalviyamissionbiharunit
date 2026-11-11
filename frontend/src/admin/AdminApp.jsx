@@ -1,17 +1,19 @@
 import React from "react";
 import { Link, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import Login from "./Login";
 import Dashboard from "./Dashboard";
-import { isLoggedIn, logoutAdmin } from "./api";
+import { useAuth } from "../contexts/AuthContext";
 import PagesManager from "./PagesManager";
 
 function Protected({ children }) {
-  return isLoggedIn() ? children : <Navigate to="/admin/login" replace />;
+  const { user, loading } = useAuth();
+  if (loading) return <p className="p-6">Checking access...</p>;
+  return user?.role === "admin" ? children : <Navigate to="/auth" replace />;
 }
 
 function Layout({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { logout } = useAuth();
   const links = [
     ["Dashboard", "/admin"],
     ["Pages", "/admin/pages"],
@@ -41,8 +43,8 @@ function Layout({ children }) {
           <button
             className="mt-4 w-full border rounded px-3 py-2 hover:bg-gray-100"
             onClick={() => {
-              logoutAdmin();
-              navigate("/admin/login");
+              logout();
+              navigate("/auth");
             }}
           >
             Logout
@@ -57,7 +59,7 @@ function Layout({ children }) {
 export default function AdminApp() {
   return (
     <Routes>
-      <Route path="login" element={<Login />} />
+      <Route path="login" element={<Navigate to="/auth" replace />} />
       <Route
         path="*"
         element={
