@@ -69,6 +69,7 @@ const Footer = () => {
                 { path: '/', label: t('nav.home') },
                 { path: '/about', label: t('nav.about') },
                 { path: '/objectives', label: t('nav.objectives') },
+                { path: '/members', label: t('nav.members') },
                 { path: '/activities', label: t('nav.activities') },
                 { path: '/join', label: t('nav.join') }
               ].map((link, idx) => (
