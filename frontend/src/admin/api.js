@@ -14,14 +14,14 @@ export const CONTENT_TYPES = [
 ];
 
 function getToken() {
-  return localStorage.getItem("admin_token");
+  return localStorage.getItem("access_token");
 }
 
 function headers(json = true) {
   const h = {};
   if (json) h["Content-Type"] = "application/json";
   const token = getToken();
-  if (token) h["x-admin-token"] = token;
+  if (token) h["Authorization"] = "Bearer " + token;
   return h;
 }
 
@@ -36,25 +36,6 @@ async function request(path, options = {}) {
     throw new Error(message);
   }
   return res.json();
-}
-
-export function logoutAdmin() {
-  localStorage.removeItem("admin_token");
-}
-
-export function isLoggedIn() {
-  return !!getToken();
-}
-
-export function adminLogin(token) {
-  return request("/admin/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ token }),
-  }).then((data) => {
-    localStorage.setItem("admin_token", data.token);
-    return data;
-  });
 }
 
 export function fetchCollection(type, admin = false) {
