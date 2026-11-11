@@ -84,17 +84,17 @@ const Home = () => {
                 <div className="flex items-center gap-8 pr-8">
                   <span>✨ {t('hero.newsText', 'Welcome to Mahamana Malviya Mission Bihar. Join us in our upcoming events and social initiatives.')}</span>
                   <span className="text-gray-300">•</span>
-                  <span>📅 Upcoming Event: Annual Gathering 2026 - Registrations now open!</span>
+                  
                   <span className="text-gray-300">•</span>
-                  <span>🤝 Volunteer training camp scheduled for next month.</span>
+                  
                   <span className="text-gray-300">•</span>
                 </div>
                 <div className="flex items-center gap-8 pr-8" aria-hidden="true">
                   <span>✨ {t('hero.newsText', 'Welcome to Mahamana Malviya Mission Bihar. Join us in our upcoming events and social initiatives.')}</span>
                   <span className="text-gray-300">•</span>
-                  <span>📅 Upcoming Event: Annual Gathering 2026 - Registrations now open!</span>
+                  
                   <span className="text-gray-300">•</span>
-                  <span>🤝 Volunteer training camp scheduled for next month.</span>
+                  
                   <span className="text-gray-300">•</span>
                 </div>
               </div>
@@ -126,7 +126,7 @@ const Home = () => {
             <div className="flex-1 text-center md:text-left relative z-10">
               <div className="inline-flex items-center justify-center md:justify-start gap-3 mb-4">
                 <div className="w-8 h-[2px] bg-[#F4C430]"></div>
-                <span className="text-[#F4C430] font-bold uppercase tracking-widest text-xs" style={getFontStyle()}>Our Inspiration</span>
+                <span className="text-[#F4C430] font-bold uppercase tracking-widest text-xs" style={getFontStyle()}>{currentLanguage === "hi" ? "हमारे प्रेरणास्रोत" : "Our Inspiration"}</span>
                 <div className="w-8 h-[2px] bg-[#F4C430] md:hidden"></div>
               </div>
               
