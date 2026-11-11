@@ -9,6 +9,10 @@
 - Private tables \`users\` and \`donations\` may contain contact details, donor records, and password hashes. **Do not export or paste their rows to any chat.**
 - Risk: tables in an exposed schema without RLS are accessible to API roles **if those roles have database grants**. Actual \`anon\` and \`authenticated\` grants/active policies have NOT yet been audited through the project connector. The screenshot does not prove that user/donor data has been accessed.
 
+## Independent non-sensitive network check
+
+From an isolated Vercel testing environment on **11 November 2026**, the public hostname `ncqpxyiuqlrnfuurvzah.supabase.co` resolved successfully and an unauthenticated request to `/auth/v1/health` returned HTTP **401** in approximately 0.44 seconds. A 401 without an API key is not proof that the service is unhealthy; this confirms a reachable HTTPS endpoint from that test environment, **not** working Render credentials or database permissions. The separate Render application previously logged a DNS lookup failure, so the configured Render `SUPABASE_URL` must be reviewed privately for an incorrect/placeholder hostname.
+
 ## Connected-account limitation
 - The accessible Supabase connectors currently point to other organizations/projects; \`get_project(ncqpxyiuqlrnfuurvzah)\` returned **permission denied** from all three connections.
 - The user's browser has an authenticated Supabase tab that can be read, but browser *control* is not available in this Chat mode. We did not run SQL, click Apply/Insert, or edit production.
