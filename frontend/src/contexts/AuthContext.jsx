@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import { apiUrl } from '../lib/apiConfig';
 
 // Create Context
 const AuthContext = createContext(null);
@@ -11,8 +12,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('access_token') || null);
   const [loading, setLoading] = useState(true);
 
-  // FIXED: Hardcoded live Render URL so it never tries to use localhost on Vercel
-  const API_BASE_URL = 'https://mahamanamalviyamissionbiharunit.onrender.com';
+  // The login and CMS now share the same configured backend URL.
 
   // Check token validity on app load
   useEffect(() => {
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-        const response = await fetch(`${API_BASE_URL}/auth/me`, {
+        const response = await fetch(apiUrl("/auth/me"), {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -37,8 +37,10 @@ export const AuthProvider = ({ children }) => {
           logout();
         }
       } catch (error) {
-        console.error("Auth verification failed", error);
-        logout();
+        // A temporary network or cold-start failure must not erase a valid session.
+        // Server-side authorization still protects every admin endpoint.
+        console.warn("Authentication service could not be reached");
+        setUser(null);
       } finally {
         setLoading(false);
       }
@@ -48,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   }, [token]); 
 
   const login = async (email, password) => {
-    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+    const response = await fetch(apiUrl("/auth/login"), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
@@ -67,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (name, email, password) => {
-    const response = await fetch(`${API_BASE_URL}/auth/register`, {
+    const response = await fetch(apiUrl("/auth/register"), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       // The backend forces the "client" role automatically for security
