@@ -276,5 +276,21 @@
   "malviya": {
     "quote": "Inspired by a lifelong commitment to education, character and service.",
     "description": "Founder of Banaras Hindu University and an influential contributor to India's freedom movement, Mahamana Pandit Madan Mohan Malaviya continues to inspire service, education and social harmony."
+  },
+  "auth": {
+    "signInTitle": "Sign in to your account",
+    "createTitle": "Create a new account",
+    "noAccount": "Don't have an account? ",
+    "haveAccount": "Already have an account? ",
+    "signUp": "Sign up",
+    "logIn": "Log in",
+    "fullName": "Full name",
+    "email": "Email address",
+    "password": "Password",
+    "fullNamePlaceholder": "Enter your full name",
+    "emailPlaceholder": "you@example.com",
+    "processing": "Processing...",
+    "signIn": "Sign in",
+    "createAccount": "Create account"
   }
 }
